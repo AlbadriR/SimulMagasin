@@ -3,7 +3,7 @@ import classes from "./css/MainNavigation.module.css";
 function MainNavigation() {
   return (
     <header className={classes.header}>
-      <div className={classes.logo}>React Meetups</div>
+      <div className={classes.logo}>Simulation de magasin</div>
       <nav>
         <ul>
           <li>

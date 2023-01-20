@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import classes from "./css/Client.module.css";
+import classes from "./Client.module.css";
 const Client = (props) => {
   const [translateX, setTranslateX] = useState(Math.random() * 50);
   const [translateY, setTranslateY] = useState(Math.random() * 30);
@@ -13,14 +13,21 @@ const Client = (props) => {
       if (nextX + 50 > props.width || nextX < 0) {
         setDirectionX(-directionX);
       }
-      if (nextY + 30 > props.height || nextY < 0) {
+      if (nextY + 50 > props.height || nextY < 0) {
         setDirectionY(-directionY);
       }
       setTranslateX(nextX);
       setTranslateY(nextY);
-    }, 50);
+    }, 20);
     return () => clearInterval(intervalId);
-  }, [translateX, translateY, directionX, directionY]);
+  }, [
+    translateX,
+    translateY,
+    directionX,
+    directionY,
+    props.width,
+    props.height,
+  ]);
 
   return (
     <div
