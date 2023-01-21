@@ -8,6 +8,7 @@ const Main = () => {
   const [numberOfClients, setnumberOfClients] = useState(10);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const [timer, setTimer] = useState(1);
+  const [caisses, setCaisses] = useState([]);
   return (
     <div
       className="main"
@@ -25,6 +26,8 @@ const Main = () => {
           setTimer,
           dimensions,
           setDimensions,
+          caisses,
+          setCaisses,
         }}
       >
         <Magasin></Magasin>

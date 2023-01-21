@@ -1,12 +1,12 @@
 import { useState, useEffect, useContext } from "react";
 import { MagasinContext } from "../Contexts/Context";
 import classes from "./Client.module.css";
-const Client = (props) => {
+const Client = () => {
   const [translateX, setTranslateX] = useState(Math.random() * 50);
   const [translateY, setTranslateY] = useState(Math.random() * 30);
   const [directionX, setDirectionX] = useState(Math.random() * 2 - 1);
   const [directionY, setDirectionY] = useState(Math.random() * 2 - 1);
-  const { dimensions, setDimensions } = useContext(MagasinContext);
+  const { dimensions } = useContext(MagasinContext);
   const [timer, setTimer] = useState(Math.floor(Math.random() * 40));
 
   useEffect(() => {
@@ -25,7 +25,14 @@ const Client = (props) => {
     return () => {
       clearInterval(intervalId);
     };
-  }, [translateX, translateY, directionX, directionY]);
+  }, [
+    translateX,
+    translateY,
+    directionX,
+    directionY,
+    dimensions.width,
+    dimensions.height,
+  ]);
 
   useEffect(() => {
     let intervalTimer;

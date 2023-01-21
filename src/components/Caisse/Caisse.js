@@ -1,10 +1,12 @@
 import classes from "./Caisse.module.css";
+import { useContext } from "react";
+import { MagasinContext } from "../Contexts/Context";
 const Caisse = () => {
+  const { caisses, setCaisses } = useContext(MagasinContext);
   const numberOfCaisse = (numberOfCaisse) => {
-    let caisses = [];
     for (let i = 0; i < numberOfCaisse; i++) {
-      caisses.push(
-        <div className={classes.caisseAttente}>
+      setCaisses.push(
+        <div key={i} className={classes.caisseAttente}>
           <div className={classes.timer}></div>
         </div>
       );
