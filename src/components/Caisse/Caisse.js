@@ -1,19 +1,13 @@
-import classes from "./Caisse.module.css";
-import { useContext } from "react";
+import {  useContext } from "react";
 import { MagasinContext } from "../Contexts/Context";
+import classes from "./Caisse.module.css";
 const Caisse = () => {
-  const { caisses, setCaisses } = useContext(MagasinContext);
-  const numberOfCaisse = (numberOfCaisse) => {
-    for (let i = 0; i < numberOfCaisse; i++) {
-      setCaisses.push(
-        <div key={i} className={classes.caisseAttente}>
-          <div className={classes.timer}></div>
-        </div>
-      );
-    }
-    return caisses;
+  const { dimensions } = useContext(MagasinContext);
+    return <div style={{width:dimensions.width, height: dimensions.height}}>
+         <div className={classes.caisseAttente}>
+      <div className={classes.timer}></div>
+    </div>
+    </div>;
   };
-  return <div className={classes.pointDeVente}>{numberOfCaisse(13)}</div>;
-};
-
-export default Caisse;
+  export default Caisse;
+  

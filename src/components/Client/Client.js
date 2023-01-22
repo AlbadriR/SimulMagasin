@@ -8,7 +8,8 @@ const Client = () => {
   const [directionY, setDirectionY] = useState(Math.random() * 2 - 1);
   const { dimensions } = useContext(MagasinContext);
   const [timer, setTimer] = useState(Math.floor(Math.random() * 40));
-
+  const { caisses } = useContext(MagasinContext);
+  const [inCash, setinCash] = useState(false);
   useEffect(() => {
     const intervalId = setInterval(() => {
       const nextX = translateX + 10 * directionX;
@@ -36,11 +37,16 @@ const Client = () => {
 
   useEffect(() => {
     let intervalTimer;
-    if (timer > 0) {
-      intervalTimer = setInterval(() => {
-        setTimer((prevTimer) => prevTimer - 1);
-      }, 1000);
+    intervalTimer = setInterval(() => {
+      setTimer((prevTimer) => prevTimer - 1);
+    }, 1000);
+    if (timer <= 0) {
+      //console.log("caisses" + caisses?.length );
+      for (let i = 0; i < caisses.length; i++) {
+      }
+    
     }
+
     return () => clearInterval(intervalTimer);
   }, [timer]);
   return (

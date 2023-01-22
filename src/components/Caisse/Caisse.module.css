@@ -1,17 +1,8 @@
-.pointDeVente {
-  width: 70vw;
-  height: 30vh;
-  border: 1px solid #000;
-  background-color: transparent;
-  position: absolute;
-  margin-top: 50vh;
-  display: flex;
-}
 .caisseAttente {
   background-color: transparent;
   border: 1px solid #000;
-  width: 5.5%;
-  height: 80%;
+  width: 40%;
+  height: 58%;
   margin-top: 40px;
   margin-left: 30px;
   position: relative;
