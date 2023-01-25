@@ -9,14 +9,10 @@ const Magasin = () => {
   const [clients, setClients] = useState([]);
   const ref = useRef(null);
 
-  const initClients = () => {
-    return clients;
-  };
-
   useEffect(() => {
     let newClients = [];
-    for (let i = 0; i <= numberOfClients; i++) {
-      newClients.push(<Client key={i}></Client>);
+    for (let i = 0; i < numberOfClients; i++) {
+      newClients.push(<Client key={i} />);
     }
     setClients(newClients);
   }, [numberOfClients]);
@@ -24,16 +20,20 @@ const Magasin = () => {
   useEffect(() => {
     const handleResize = () => {
       setDimensions({
-        width: ref.current.clientWidth, // return the magasin width in px
-        height: ref.current.clientHeight, // return the magasin height in px
+        width: ref.current.clientWidth,
+        height: ref.current.clientHeight,
       });
     };
-    handleResize(); // On l'appelle une première fois pour initialiser les dimensions
-    window.addEventListener("resize", handleResize); // si les dimensions changent, on les met à jour
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, [setDimensions]);
+
   return (
     <div className={classes.magasin} ref={ref}>
-      {initClients()}
+      {clients.map((client) => {
+        return client;
+      })}
     </div>
   );
 };

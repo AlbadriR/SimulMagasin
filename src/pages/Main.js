@@ -12,7 +12,7 @@ const Main = () => {
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const [hour, setHour] = useState(1);
   const [caisses] = useState([]);
-  const [inQueue, setInQueue] = useState(null);
+  const [inQueue, setInQueue] = useState(0);
   return (
     <div
       className="main"
