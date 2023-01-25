@@ -1,15 +1,17 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useRef } from "react";
 import { MagasinContext } from "../Contexts/Context";
 import classes from "./Client.module.css";
 const Client = () => {
   const [translateX, setTranslateX] = useState(Math.random() * 50);
+  const [isInQueue, setIsInQueue] = useState(false);
   const [translateY, setTranslateY] = useState(Math.random() * 30);
   const [directionX, setDirectionX] = useState(Math.random() * 2 - 1);
   const [directionY, setDirectionY] = useState(Math.random() * 2 - 1);
+  const clientRef = useRef();
   const { dimensions } = useContext(MagasinContext);
   const [timer, setTimer] = useState(Math.floor(Math.random() * 40));
-  const { caisses } = useContext(MagasinContext);
-  const [inCash, setinCash] = useState(false);
+
+  const { inQueue, setInQueue } = useContext(MagasinContext);
   useEffect(() => {
     const intervalId = setInterval(() => {
       const nextX = translateX + 10 * directionX;
@@ -39,18 +41,23 @@ const Client = () => {
     let intervalTimer;
     intervalTimer = setInterval(() => {
       setTimer((prevTimer) => prevTimer - 1);
-    }, 1000);
-    if (timer <= 0) {
-      //console.log("caisses" + caisses?.length );
-      for (let i = 0; i < caisses.length; i++) {
+      if (timer <= 0) {
+        if (!isInQueue) {
+          setInQueue(inQueue + 1);
+          clientRef.current.remove();
+        }
+        setIsInQueue(true);
+        // fully remove client from dom
       }
-    
-    }
+
+      //console.log(caisses[0]);
+    }, 1000);
 
     return () => clearInterval(intervalTimer);
   }, [timer]);
   return (
     <div
+      ref={clientRef}
       className={classes.client}
       style={{ transform: `translate(${translateX}px, ${translateY}px)` }}
     >

@@ -9,6 +9,7 @@ const Main = () => {
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const [timer, setTimer] = useState(1);
   const [caisses] = useState([]);
+  const [inQueue, setInQueue] = useState(0);
   return (
     <div
       className="main"
@@ -27,6 +28,8 @@ const Main = () => {
           dimensions,
           setDimensions,
           caisses,
+          inQueue,
+          setInQueue,
         }}
       >
         <Magasin></Magasin>

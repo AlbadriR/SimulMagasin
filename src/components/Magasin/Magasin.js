@@ -10,7 +10,7 @@ const Magasin = () => {
 
   const initClients = () => {
     let clients = [];
-    for (let i = 0; i < numberOfClients; i++) {
+    for (let i = 0; i <= numberOfClients; i++) {
       clients.push(<Client key={i}></Client>);
     }
     return clients;
