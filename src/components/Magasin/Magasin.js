@@ -1,4 +1,4 @@
-import { useEffect, useContext, useRef } from "react";
+import { useEffect, useContext, useRef, useState } from "react";
 import { MagasinContext } from "../Contexts/Context";
 import Client from "../Client/Client";
 import classes from "./Magasin.module.css";
@@ -6,15 +6,20 @@ import classes from "./Magasin.module.css";
 const Magasin = () => {
   const { numberOfClients } = useContext(MagasinContext);
   const { setDimensions } = useContext(MagasinContext);
+  const [clients, setClients] = useState([]);
   const ref = useRef(null);
 
   const initClients = () => {
-    let clients = [];
-    for (let i = 0; i <= numberOfClients; i++) {
-      clients.push(<Client key={i}></Client>);
-    }
     return clients;
   };
+
+  useEffect(() => {
+    let newClients = [];
+    for (let i = 0; i <= numberOfClients; i++) {
+      newClients.push(<Client key={i}></Client>);
+    }
+    setClients(newClients);
+  }, [numberOfClients]);
 
   useEffect(() => {
     const handleResize = () => {

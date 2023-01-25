@@ -1,20 +1,25 @@
 import classes from "./Buttons.module.css";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { MagasinContext } from "../Contexts/Context";
+import { SettingsContext } from "../Contexts/SettingsContext";
 const Buttons = () => {
   const { numberOfClients, setnumberOfClients } = useContext(MagasinContext);
-  const { timer, setTimer } = useContext(MagasinContext);
+  const { hour, setHour } = useContext(MagasinContext);
+  const { maxClient } = useContext(SettingsContext);
+  const { clientParHeure } = useContext(SettingsContext);
   const addClients = (n) => {
     setnumberOfClients(numberOfClients + n);
-    console.log(numberOfClients);
   };
+  setInterval(addClients.bind(this, clientParHeure), 60000);
 
   const addTime = (n) => {
-    setTimer(timer + n);
+    setHour(hour + n);
   };
   return (
     <div className={classes.Buttons}>
-      <button onClick={() => addClients(5)}>Ajouter 5 clients</button>
+      <button onClick={() => addClients(maxClient <= 0 ? 5 : maxClient)}>
+        Ajouter {maxClient <= 0 ? 5 : maxClient} clients
+      </button>
       <button onClick={() => addTime(1)}>Ajouter 1H</button>
     </div>
   );

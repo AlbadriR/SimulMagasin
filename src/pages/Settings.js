@@ -1,5 +1,5 @@
 //stackoverflow.com/questions/52238637/react-router-how-to-pass-data-between-pages-in-react/68967670#68967670
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
@@ -7,6 +7,8 @@ import SendIcon from "@mui/icons-material/Send";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import { GlobalStyles } from "@mui/material";
+import { SettingsContext } from "../components/Contexts/SettingsContext";
+
 const Settings = () => {
   const navigate = useNavigate();
   const useStyles = GlobalStyles((theme) => ({
@@ -20,17 +22,22 @@ const Settings = () => {
       width: "100%",
     },
   }));
-  const [maxClient, setMaxClient] = useState(0);
-  const [maxCaisse, setMaxCaisse] = useState(0);
-  const [maxTempCourse, setMaxTempCourse] = useState(0);
-  const [minTempCourse, setMinTempCourse] = useState(0);
-  const [maxTempAttenteCaisse, setMaxTempAttenteCaisse] = useState(0);
-  const [clientParHeure, setClientParHeure] = useState(0);
+  const { maxClient, setMaxClient } = useContext(SettingsContext);
+  const { maxCaisse, setMaxCaisse } = useContext(SettingsContext);
+  const { maxTempCourse, setMaxTempCourse } = useContext(SettingsContext);
+  const { minTempCourse, setMinTempCourse } = useContext(SettingsContext);
+  const { maxTempAttenteCaisse, setMaxTempAttenteCaisse } =
+    useContext(SettingsContext);
+  const { clientParHeure, setClientParHeure } = useContext(SettingsContext);
   const toMagasin = () => {
-    navigate("/", {
-      /*faire passer les données d'un form*/
-    });
+    navigate("/", {});
   };
+  useEffect(() => {
+    setClientParHeure([
+      0, 0, 0, 0, 10, 20, 30, 50, 60, 70, 80, 90, 100, 80, 20, 60, 40, 30, 20,
+      10, 0, 0, 0, 0,
+    ]);
+  }, []);
   return (
     <div>
       <div className={useStyles.container}>
@@ -48,7 +55,7 @@ const Settings = () => {
         </TableRow>
         <TableRow>
           <TableCell>
-            <label>Nombre de client maximum : </label>
+            <label>Nombre de caisses maximum : </label>
           </TableCell>
           <TableCell>
             <TextField
@@ -60,7 +67,7 @@ const Settings = () => {
         </TableRow>
         <TableRow>
           <TableCell>
-            <label>Nombre de client maximum : </label>
+            <label>Temp maximum en course : </label>
           </TableCell>
           <TableCell>
             <TextField
@@ -72,13 +79,37 @@ const Settings = () => {
         </TableRow>
         <TableRow>
           <TableCell>
-            <label>Nombre de client maximum : </label>
+            <label>Temp minimum en course : </label>
           </TableCell>
           <TableCell>
             <TextField
               id="maxTempCourse"
               variant="outlined"
-              onChange={(e) => setMaxTempCourse(e.target.value)}
+              onChange={(e) => setMinTempCourse(e.target.value)}
+            />
+          </TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell>
+            <label>Temp attente max avant file caisse : </label>
+          </TableCell>
+          <TableCell>
+            <TextField
+              id="maxTempCourse"
+              variant="outlined"
+              onChange={(e) => setMaxTempAttenteCaisse(e.target.value)}
+            />
+          </TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell>
+            <label>Nombre de client par heure : </label>
+          </TableCell>
+          <TableCell>
+            <TextField
+              id="maxTempCourse"
+              variant="outlined"
+              //onChange={(e) => setClientParHeure(e.target.value)}
             />
           </TableCell>
         </TableRow>

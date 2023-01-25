@@ -6,10 +6,13 @@ import Buttons from "../components/Buttons/Buttons";
 import { MagasinContext } from "../components/Contexts/Context";
 const Main = () => {
   const [numberOfClients, setnumberOfClients] = useState(10);
+  const [numberOfCaisses, setNumberOfCaisses] = useState(10);
+  const [removedClient, setremovedClient] = useState(false);
+  const [valeurEnCaisse, setValeurEnCaisse] = useState([]);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
-  const [timer, setTimer] = useState(1);
+  const [hour, setHour] = useState(1);
   const [caisses] = useState([]);
-  const [inQueue, setInQueue] = useState(0);
+  const [inQueue, setInQueue] = useState(null);
   return (
     <div
       className="main"
@@ -23,13 +26,19 @@ const Main = () => {
         value={{
           numberOfClients,
           setnumberOfClients,
-          timer,
-          setTimer,
+          hour,
+          setHour,
           dimensions,
           setDimensions,
           caisses,
           inQueue,
           setInQueue,
+          numberOfCaisses,
+          setNumberOfCaisses,
+          valeurEnCaisse,
+          setValeurEnCaisse,
+          removedClient,
+          setremovedClient,
         }}
       >
         <Magasin></Magasin>
